@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 	public double y;
 	public double z;
 	
+	public static float speed = -0.01f;
 	
     // Start is called before the first frame update
     void Start()
@@ -22,28 +23,16 @@ public class Movement : MonoBehaviour
 		y = transform.position.y;
 		z = transform.position.z;
     	
-		transform.position += new Vector3(-0.01f, 0, 0);
+		transform.position += new Vector3(speed, 0, 0);
     	
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.position += new Vector3(-1, 0, 0);
-            if (!ValidMove())
-            {
-                transform.position -= new Vector3(-1, 0, 0);
-            }
+	        transform.position += new Vector3(0, 0, -1);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.position += new Vector3(1, 0, 0);
-            if (!ValidMove())
-            {
-                transform.position -= new Vector3(1, 0, 0);
-            }
+	        transform.position += new Vector3(0, 0, 1);
         }
-    }
-    bool ValidMove()
-    {
-        return true;
     }
 }
 
