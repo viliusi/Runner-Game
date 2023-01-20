@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 	public double y;
 	public double z;
 	
+	public static float speed = -0.01f;
 	
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class Movement : MonoBehaviour
 		y = transform.position.y;
 		z = transform.position.z;
     	
-		transform.position += new Vector3(-000.1f, 0, 0);
+		transform.position += new Vector3(speed, 0, 0);
     	
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {

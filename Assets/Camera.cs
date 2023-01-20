@@ -15,7 +15,6 @@ public class Camera : MonoBehaviour
     }
     
 	public Transform Player;
-	public Transform CameraPos;
 
 	// Update is called once per frame
 	void Update () 
