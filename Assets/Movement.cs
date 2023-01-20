@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	public double x;
-	public double y;
-	public double z;
+	public float speed = 0.01f;
 	
-	public static float speed = -0.01f;
+	private bool valid;
 	
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, 5, 0);
+	    transform.position = new Vector3(0, 3, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+	void Update()
 	{
-		x = transform.position.x;
-		y = transform.position.y;
-		z = transform.position.z;
-    	
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+			valid = ValidMove();
+        	
+			if (valid)
+			{
+				transform.position -= new Vector3(0, 0, -1);
+			}
+		}
+		else if (Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			valid = ValidMove();
+        	
+			if (valid)
+			{
+				transform.position -= new Vector3(0, 0, 1);
+			}
+		}
+	}
+    void FixedUpdate()
+	{
 		transform.position += new Vector3(speed, 0, 0);
-    	
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-	        transform.position += new Vector3(0, 0, -1);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-	        transform.position += new Vector3(0, 0, 1);
-        }
+	}
+    bool ValidMove()
+	{
+		// some code here, or sum
+        return true;
     }
 }
 
