@@ -10,11 +10,9 @@ public class Field : MonoBehaviour
         
     }
 
-	public Transform Player;
-
     // Update is called once per frame
     void Update()
 	{
-		transform.position += new Vector3(Movement.speed, 0, 0);
+		
     }
 }
