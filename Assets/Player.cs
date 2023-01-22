@@ -30,32 +30,25 @@ public class Player : MonoBehaviour
 			else if (other.tag == "Finish")
 			{
 				isFinished = true;
-				if (currentLevelIndex < (SceneManager.sceneCountInBuildSettings - 1))
-				{
-					currentLevelIndex++;
-				}
 				nextLevel();
 			}
 		}
 		else
 		{
-			print("Not checking collisions");
+			
 		}
 	}
 
     // Start is called before the first frame update
     void Start()
 	{
+		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		framesToWait = 20;
 	    rb = GetComponent<Rigidbody>();
     }
 
 	void Update()
 	{
-		if (currentLevelIndex == null)
-		{
-			currentLevelIndex = 0;
-		}
 		if (dying == true) 
 		{
 			resetPlayer();
@@ -131,9 +124,16 @@ public class Player : MonoBehaviour
 	}
 	void nextLevel()
 	{
-		SceneManager.LoadScene(currentLevelIndex);
+		currentLevelIndex++;
 		
-		resetPlayer();
+		if (currentLevelIndex <= (SceneManager.sceneCountInBuildSettings - 1))
+		{
+			SceneManager.LoadScene(currentLevelIndex);
+		}
+		else
+		{
+			SceneManager.LoadScene(1);
+		}
 	}
 }
 
