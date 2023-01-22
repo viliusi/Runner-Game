@@ -6,3 +6,5 @@ Controls:<br>
 Left arrow = Left<br>
 Right arrow = Right<br>
 Space = Jump<br>
+R = Reset<>
+Alt + F4 = Close game
