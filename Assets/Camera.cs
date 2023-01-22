@@ -20,7 +20,7 @@ public class Camera : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
 	{
-		transform.position = Player.transform.position + new Vector3(-10, 3, 0);
+		transform.position = Player.transform.position + new Vector3(-8, 5, 0);
 		Light.transform.position = Player.transform.position + new Vector3(-9, 6, 0);
 	}
 }

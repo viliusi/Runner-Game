@@ -1,46 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
 	public float speed = 0.1f;
 	private bool valid;
-	bool isCurrentlyColliding;
+	bool dying;
 	bool jumpable;
 	public Rigidbody rb;
 	public float distToGround;
+	public int currentLevelIndex;
+	public bool isFinished;
+	public int framesToWait;
      
 	private void OnTriggerEnter(Collider other)
 	{
-		print(other.tag);
-		
-		if (other.tag == "Ouchies")
+		if (isFinished == false)
 		{
-			isCurrentlyColliding = true;
+			if (other.tag == "Ouchies")
+			{
+				dying = true;
+			}
+			else if (other.tag == "Ramps and such" && other.tag == "Field")
+			{
+				jumpable = true;
+			}
+			else if (other.tag == "Finish")
+			{
+				isFinished = true;
+				if (currentLevelIndex < (SceneManager.sceneCountInBuildSettings - 1))
+				{
+					currentLevelIndex++;
+				}
+				nextLevel();
+			}
 		}
-		else if (other.tag == "Ramps and such" && other.tag == "Field")
+		else
 		{
-			jumpable = true;
+			print("Not checking collisions");
 		}
 	}
 
     // Start is called before the first frame update
     void Start()
-    {
+	{
+		framesToWait = 20;
 	    rb = GetComponent<Rigidbody>();
-	    resetPlayer();
     }
 
 	void Update()
 	{
-		if (isCurrentlyColliding) 
+		if (currentLevelIndex == null)
+		{
+			currentLevelIndex = 0;
+		}
+		if (dying == true) 
 		{
 			resetPlayer();
 			
-			isCurrentlyColliding = false;
+			dying = false;
 		}
-		
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -72,10 +93,26 @@ public class Player : MonoBehaviour
 				jumpable = false;
 			}
 		}
+		else if (Input.GetKeyDown(KeyCode.R))
+		{
+			resetPlayer();
+		}
 	}
     void FixedUpdate()
 	{
 		transform.position += new Vector3(speed, 0, 0);
+		
+		if (isFinished == true)
+		{
+			if (framesToWait > 0)
+			{
+				framesToWait--;
+			}
+			else if (framesToWait == 0)
+			{
+				isFinished = false;
+			}
+		}
 	}
     bool ValidMove()
 	{
@@ -85,11 +122,18 @@ public class Player : MonoBehaviour
 	void resetPlayer()
 	{
 		transform.position = new Vector3(0, 3, 0);
-		transform.eulerAngles = new Vector3(0, 0, 0);
+		transform.rotation = Quaternion.Euler(0,0,0);
+		rb.velocity = new Vector3(0, 0, 0);
 	}
 	bool IsGrounded() 
 	{
 		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+	}
+	void nextLevel()
+	{
+		SceneManager.LoadScene(currentLevelIndex);
+		
+		resetPlayer();
 	}
 }
 
