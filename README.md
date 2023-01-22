@@ -1,8 +1,8 @@
 # Runner-Game
 
-This is my attempt at making a runner game and learning Unity
+This is my attempt at making a runner game and learning Unity <br>
 
-Controls:
-Left arrow = Left
-Right arrow = Right
-Space = Jump
+Controls:<br>
+Left arrow = Left<br>
+Right arrow = Right<br>
+Space = Jump<br>
