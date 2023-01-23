@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+	public static double minutes;
+	public static double seconds;
+	public static double miliSecs;
 	public float speed = 0.1f;
 	private bool valid;
 	bool dying;
@@ -42,6 +45,19 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
+		if (SceneManager.GetActiveScene().buildIndex == 3)
+		{
+			miliSecs = 0;
+			seconds = 0;
+			minutes = 0;
+		}
+		else if (SceneManager.GetActiveScene().buildIndex == 2)
+		{
+			miliSecs = 0;
+			seconds = 0;
+			minutes = 0;
+		}
+		
 		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		framesToWait = 20;
 	    rb = GetComponent<Rigidbody>();
@@ -90,9 +106,31 @@ public class Player : MonoBehaviour
 		{
 			resetPlayer();
 		}
+		else if (Input.GetKeyDown(KeyCode.H))
+		{
+			SceneManager.LoadScene(2);
+		}
 	}
     void FixedUpdate()
 	{
+		if (miliSecs < 980)
+		{
+			miliSecs += 20;
+		}
+		else
+		{
+			miliSecs = 0;
+			
+			seconds += 1;
+			
+			if (60 < seconds)
+			{
+				seconds = 0;
+				
+				minutes += 1;
+			}
+		}
+		
 		transform.position += new Vector3(speed, 0, 0);
 		
 		if (isFinished == true)
@@ -129,6 +167,10 @@ public class Player : MonoBehaviour
 		if (currentLevelIndex <= (SceneManager.sceneCountInBuildSettings - 1))
 		{
 			SceneManager.LoadScene(currentLevelIndex);
+		}
+		else if (SceneManager.GetActiveScene().buildIndex == 2)
+		{
+			SceneManager.LoadScene(1);
 		}
 		else
 		{

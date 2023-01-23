@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 	public bool isStart;
 	public bool isMenu;
 	public bool isQuit;
+	public bool isEagle;
 	
 	// Start is called before the first frame update
 	void Start()
@@ -24,11 +25,15 @@ public class MainMenu : MonoBehaviour
 	void OnMouseUp(){
 		if(isStart)
 		{
-			SceneManager.LoadScene(2);
+			SceneManager.LoadScene(3);
 		}
 		if(isMenu)
 		{
 			SceneManager.LoadScene(0);
+		}
+		if(isEagle)
+		{
+			SceneManager.LoadScene(2);
 		}
 		if (isQuit)
 		{
