@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 			
 			seconds += 1;
 			
-			if (60 < seconds)
+			if (59 < seconds)
 			{
 				seconds = 0;
 				
