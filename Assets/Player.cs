@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
 		}
 		else if (Input.GetKeyDown(KeyCode.H))
 		{
-			SceneManager.LoadScene(2);
+			SceneManager.LoadScene(3);
 		}
 	}
     void FixedUpdate()
