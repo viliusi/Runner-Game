@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589245, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 340005303}
   - component: {fileID: 340005302}
   - component: {fileID: 340005306}
+  - component: {fileID: 340005307}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -467,6 +468,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToWait: 0
+--- !u!114 &340005307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340005301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ccec4ee24b72d488159616cf0bf1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStart: 0
+  isMenu: 0
+  isQuit: 0
+  isEagle: 1
 --- !u!1 &349317238
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +894,7 @@ MonoBehaviour:
   isStart: 0
   isMenu: 0
   isQuit: 1
+  isEagle: 0
 --- !u!114 &733148765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,6 +1236,7 @@ MonoBehaviour:
   isStart: 0
   isMenu: 1
   isQuit: 0
+  isEagle: 0
 --- !u!1 &1159897633
 GameObject:
   m_ObjectHideFlags: 0

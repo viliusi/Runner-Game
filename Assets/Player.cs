@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 	}
     void FixedUpdate()
 	{
-		if (miliSecs < 980)
+		if (miliSecs <= 960)
 		{
 			miliSecs += 20;
 		}
@@ -153,8 +153,9 @@ public class Player : MonoBehaviour
 	void resetPlayer()
 	{
 		transform.position = new Vector3(0, 3, 0);
-		transform.rotation = Quaternion.Euler(0,0,0);
 		rb.velocity = new Vector3(0, 0, 0);
+		rb.angularVelocity = new Vector3(0, 0, 0);
+		transform.rotation = Quaternion.identity;
 	}
 	bool IsGrounded() 
 	{
