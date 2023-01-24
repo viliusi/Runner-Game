@@ -26,10 +26,6 @@ public class Player : MonoBehaviour
 			{
 				dying = true;
 			}
-			else if (other.tag == "Ramps and such" && other.tag == "Field")
-			{
-				jumpable = true;
-			}
 			else if (other.tag == "Finish")
 			{
 				isFinished = true;
