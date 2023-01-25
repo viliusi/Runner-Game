@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	public int currentLevelIndex;
 	public bool isFinished;
 	public int framesToWait;
+	public int framesToWaitJump;
      
 	private void OnTriggerEnter(Collider other)
 	{
@@ -89,13 +90,18 @@ public class Player : MonoBehaviour
 		}
 		else if (Input.GetKeyDown(KeyCode.Space))
 		{			
-			jumpable = IsGrounded();
-			
-			if (jumpable == true)
+			if (framesToWaitJump == 0)
 			{
-				rb.velocity += new Vector3(0, 7, 0);
+				jumpable = IsGrounded();
+			
+				if (jumpable == true)
+				{
+					rb.velocity += new Vector3(0, 7, 0);
 				
-				jumpable = false;
+					jumpable = false;
+					
+					framesToWaitJump = 20;
+				}
 			}
 		}
 		else if (Input.GetKeyDown(KeyCode.R))
@@ -139,6 +145,11 @@ public class Player : MonoBehaviour
 			{
 				isFinished = false;
 			}
+		}
+		if (framesToWaitJump > 0)
+		{
+			framesToWaitJump--;
+			print(framesToWaitJump);
 		}
 	}
     bool ValidMove()

@@ -18,7 +18,7 @@ public class Camera : MonoBehaviour
 	public Transform Light;
 
 	// Update is called once per frame
-	void Update() 
+	void FixedUpdate() 
 	{
 		transform.position = Player.transform.position + new Vector3(-8, 5, 0);
 		Light.transform.position = Player.transform.position + new Vector3(-9, 10, 0);
