@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Victory.unity
     guid: b0a213181a5c165498aaba5e5ae34eb6
   - enabled: 1
+    path: Assets/Scenes/Controls.unity
+    guid: 718c08b096c192744b1c9b4707686cd1
+  - enabled: 1
     path: Assets/Scenes/Sune Level.unity
     guid: a5d13e9035c38604e8ed5d7ed033675e
   - enabled: 1

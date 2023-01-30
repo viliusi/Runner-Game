@@ -42,13 +42,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 3)
+		if (SceneManager.GetActiveScene().buildIndex == 4)
 		{
 			miliSecs = 0;
 			seconds = 0;
 			minutes = 0;
 		}
-		else if (SceneManager.GetActiveScene().buildIndex == 2)
+		else if (SceneManager.GetActiveScene().buildIndex == 3)
 		{
 			miliSecs = 0;
 			seconds = 0;
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
 		}
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
 		{
 			valid = ValidMove();
         	
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 				rb.velocity += new Vector3(0, 0, 5);
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.RightArrow))
+		else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
 		{
 			valid = ValidMove();
         	
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 				rb.velocity += new Vector3(0, 0, -5);
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.Space))
+		else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
 		{			
 			if (framesToWaitJump == 0)
 			{
@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
 		}
 		else if (Input.GetKeyDown(KeyCode.H))
 		{
-			SceneManager.LoadScene(3);
+			SceneManager.LoadScene(4);
 		}
 	}
     void FixedUpdate()
@@ -176,7 +176,7 @@ public class Player : MonoBehaviour
 		{
 			SceneManager.LoadScene(currentLevelIndex);
 		}
-		else if (SceneManager.GetActiveScene().buildIndex == 2)
+		else if (SceneManager.GetActiveScene().buildIndex == 3)
 		{
 			SceneManager.LoadScene(1);
 		}
