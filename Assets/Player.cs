@@ -68,41 +68,20 @@ public class Player : MonoBehaviour
 			
 			dying = false;
 		}
+		
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
 		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
 		{
-			valid = ValidMove();
-        	
-			if (valid)
-			{
-				left();
-			}
+			left();
 		}
 		else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
 		{
-			valid = ValidMove();
-        	
-			if (valid)
-			{
-				right();
-			}
+			right();
 		}
 		else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
 		{			
-			if (framesToWaitJump == 0)
-			{
-				jumpable = IsGrounded();
-			
-				if (jumpable == true)
-				{
-					jump();
-				
-					jumpable = false;
-					
-					framesToWaitJump = 20;
-				}
-			}
+			jump();
 		}
 		else if (Input.GetKeyDown(KeyCode.R))
 		{
@@ -186,15 +165,36 @@ public class Player : MonoBehaviour
 	}
 	public void jump()
 	{
-		rb.velocity += new Vector3(0, 7, 0);
+		if (framesToWaitJump == 0)
+		{
+			jumpable = IsGrounded();
+			
+			if (jumpable == true)
+			{
+				rb.velocity += new Vector3(0, 7, 0);
+				
+				jumpable = false;
+					
+				framesToWaitJump = 20;
+			}
+		}
 	}
 	public void right()
 	{
-		rb.velocity += new Vector3(0, 0, -5);
+		valid = ValidMove();
+        	
+		if (valid)
+		{
+			rb.velocity += new Vector3(0, 0, -5);
+		}
 	}
 	public void left()
 	{
-		rb.velocity += new Vector3(0, 0, 5);
+		valid = ValidMove();
+        	
+		if (valid)
+		{
+			rb.velocity += new Vector3(0, 0, 5);
+		}
 	}
 }
-
