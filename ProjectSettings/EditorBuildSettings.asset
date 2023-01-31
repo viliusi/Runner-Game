@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 718c08b096c192744b1c9b4707686cd1
   - enabled: 1
     path: Assets/Scenes/Sune Level.unity
-    guid: a5d13e9035c38604e8ed5d7ed033675e
+    guid: 76dda7527926eee4887346643f334b50
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 5.unity
     guid: 1d24ba3656ef9f240bde5d5b3a654d1f
+  - enabled: 1
+    path: Assets/Scenes/Level 6.unity
+    guid: a5d13e9035c38604e8ed5d7ed033675e
   m_configObjects: {}

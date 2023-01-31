@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         	
 			if (valid)
 			{
-				rb.velocity += new Vector3(0, 0, 5);
+				left();
 			}
 		}
 		else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         	
 			if (valid)
 			{
-				rb.velocity += new Vector3(0, 0, -5);
+				right();
 			}
 		}
 		else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
 			
 				if (jumpable == true)
 				{
-					rb.velocity += new Vector3(0, 7, 0);
+					jump();
 				
 					jumpable = false;
 					
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
 	}
     void FixedUpdate()
 	{
-		if (miliSecs <= 960)
+		if (miliSecs <= 970)
 		{
 			miliSecs += 20;
 		}
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 			
 			seconds += 1;
 			
-			if (59 < seconds)
+			if (58.5 <= seconds)
 			{
 				seconds = 0;
 				
@@ -149,7 +149,6 @@ public class Player : MonoBehaviour
 		if (framesToWaitJump > 0)
 		{
 			framesToWaitJump--;
-			print(framesToWaitJump);
 		}
 	}
     bool ValidMove()
@@ -184,6 +183,18 @@ public class Player : MonoBehaviour
 		{
 			SceneManager.LoadScene(1);
 		}
+	}
+	public void jump()
+	{
+		rb.velocity += new Vector3(0, 7, 0);
+	}
+	public void right()
+	{
+		rb.velocity += new Vector3(0, 0, -5);
+	}
+	public void left()
+	{
+		rb.velocity += new Vector3(0, 0, 5);
 	}
 }
 

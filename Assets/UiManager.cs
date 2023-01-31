@@ -17,7 +17,7 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-	    _timeText.text = "Time: " + 0;
+	    _timeText.text = "0";
     }
 
     // Update is called once per frame
@@ -34,19 +34,20 @@ public class UiManager : MonoBehaviour
 		}
 		
 		miliRound = Mathf.RoundToInt((float)Player.miliSecs);
-		if (miliRound <= 99)
-		{
-			strMili = 0 + miliRound.ToString();
-		}
-		else if (miliRound == 0)
+		
+		if (miliRound <= 10)
 		{
 			strMili = "000";
+		}
+		else if (miliRound <= 99)
+		{
+			strMili = "0" + miliRound.ToString();
 		}
 		else
 		{
 			strMili = miliRound.ToString();
 		}
 		
-		_timeText.text = "Time: " + Player.minutes + ":" + strSecs + ":" +  strMili;   
+		_timeText.text = Player.minutes + ":" + strSecs + ":" +  strMili;   
     }
 }
