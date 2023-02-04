@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
 	public static double miliSecs;
 	public float speed = 0.1f;
 	private bool valid;
-	bool dying;
 	bool jumpable;
 	public Rigidbody rb;
 	public float distToGround;
@@ -25,7 +24,7 @@ public class Player : MonoBehaviour
 		{
 			if (other.tag == "Ouchies")
 			{
-				dying = true;
+				resetPlayer();
 			}
 			else if (other.tag == "Finish")
 			{
@@ -62,13 +61,6 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-		if (dying == true) 
-		{
-			resetPlayer();
-			
-			dying = false;
-		}
-		
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
 		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
