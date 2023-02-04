@@ -19,9 +19,4 @@ public class MovingBlock : MonoBehaviour
 	{
 		transform.position = Vector3.Lerp (start, end, Mathf.PingPong(Time.time*speed, 1.0f));
     }
-    
-	void FixedUpdate()
-	{
-	    
-	}
 }
