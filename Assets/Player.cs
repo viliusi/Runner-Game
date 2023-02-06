@@ -14,21 +14,23 @@ public class Player : MonoBehaviour
 	public Rigidbody rb;
 	public float distToGround;
 	public int currentLevelIndex;
-	public bool isFinished;
+	public bool isPause;
 	public int framesToWait;
 	public int framesToWaitJump;
+	public static int deaths;
      
 	private void OnTriggerEnter(Collider other)
 	{
-		if (isFinished == false)
+		if (isPause == false)
 		{
 			if (other.tag == "Ouchies")
 			{
+				isPause = true;
 				resetPlayer();
 			}
 			else if (other.tag == "Finish")
 			{
-				isFinished = true;
+				isPause = true;
 				nextLevel();
 			}
 		}
@@ -41,17 +43,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 4)
+		if (SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 3)
 		{
 			miliSecs = 0;
 			seconds = 0;
 			minutes = 0;
-		}
-		else if (SceneManager.GetActiveScene().buildIndex == 3)
-		{
-			miliSecs = 0;
-			seconds = 0;
-			minutes = 0;
+			
+			deaths = 0;
 		}
 		
 		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
@@ -106,7 +104,7 @@ public class Player : MonoBehaviour
 		
 		transform.position += new Vector3(speed, 0, 0);
 		
-		if (isFinished == true)
+		if (isPause == true)
 		{
 			if (framesToWait > 0)
 			{
@@ -114,7 +112,7 @@ public class Player : MonoBehaviour
 			}
 			else if (framesToWait == 0)
 			{
-				isFinished = false;
+				isPause = false;
 			}
 		}
 		if (framesToWaitJump > 0)
@@ -129,6 +127,8 @@ public class Player : MonoBehaviour
 	}
 	void resetPlayer()
 	{
+		deaths++;
+		
 		transform.position = new Vector3(0, 3, 0);
 		rb.velocity = new Vector3(0, 0, 0);
 		rb.angularVelocity = new Vector3(0, 0, 0);

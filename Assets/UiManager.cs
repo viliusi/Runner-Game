@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 
 public class UiManager : MonoBehaviour
 {
 	[SerializeField]
 	private TextMeshProUGUI _timeText;
+	[SerializeField]
+	private TextMeshProUGUI _levelNum;
+	[SerializeField]
+	private TextMeshProUGUI _deathCount;
 	
 	double secsRound;
 	string strSecs;
@@ -49,5 +55,9 @@ public class UiManager : MonoBehaviour
 		}
 		
 		_timeText.text = Player.minutes + ":" + strSecs + ":" +  strMili;   
+		
+		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 3);
+		
+		_deathCount.text = "Deaths: " + Player.deaths;
     }
 }
