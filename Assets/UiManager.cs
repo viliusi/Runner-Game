@@ -27,7 +27,7 @@ public class UiManager : MonoBehaviour
     }
 
     // Update is called once per frame
-	void FixedUpdate()
+	void Update()
 	{
 		secsRound = Mathf.RoundToInt((float)Player.seconds);
 		if (secsRound <= 9)
@@ -59,5 +59,18 @@ public class UiManager : MonoBehaviour
 		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 3);
 		
 		_deathCount.text = "Deaths: " + Player.deaths;
-    }
+	}
+    
+	void left()
+	{
+		Player.left();
+	}
+	void right()
+	{
+		Player.right();
+	}
+	void jump()
+	{
+		Player.jump();
+	}
 }

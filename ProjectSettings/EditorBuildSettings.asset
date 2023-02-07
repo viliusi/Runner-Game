@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Controls.unity
     guid: 718c08b096c192744b1c9b4707686cd1
   - enabled: 1
+    path: Assets/Scenes/UI.unity
+    guid: 487d6e3a4b54ed84bb5ef045a4edcb63
+  - enabled: 1
     path: Assets/Scenes/Sune Level.unity
     guid: 76dda7527926eee4887346643f334b50
   - enabled: 1
@@ -43,10 +46,10 @@ EditorBuildSettings:
     guid: c6ce6a01b0e26a140b83af80d1effb7c
   - enabled: 1
     path: Assets/Scenes/Level 9.unity
-    guid: bbbd41f7ca585dc4099048eef33be370
+    guid: f11965948b7a4b140a7fb9b2a9cf17b0
   - enabled: 1
     path: Assets/Scenes/Level 10.unity
-    guid: f11965948b7a4b140a7fb9b2a9cf17b0
+    guid: b8085425232b7604192572ef4e770c06
   - enabled: 1
     path: Assets/Scenes/Level 11.unity
     guid: 51edc3d14699c4b49883a7f79e8b2c6e

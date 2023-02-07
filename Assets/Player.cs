@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 3)
+		if (SceneManager.GetActiveScene().buildIndex == 5 || SceneManager.GetActiveScene().buildIndex == 4)
 		{
 			miliSecs = 0;
 			seconds = 0;
@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
 			deaths = 0;
 		}
 		
+		SceneManager.LoadScene(3, LoadSceneMode.Additive);
 		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		framesToWait = 20;
 	    rb = GetComponent<Rigidbody>();
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour
 		}
 		else if (Input.GetKeyDown(KeyCode.H))
 		{
-			SceneManager.LoadScene(4);
+			SceneManager.LoadScene(5);
 		}
 	}
     void FixedUpdate()
@@ -146,7 +147,7 @@ public class Player : MonoBehaviour
 		{
 			SceneManager.LoadScene(currentLevelIndex);
 		}
-		else if (SceneManager.GetActiveScene().buildIndex == 3)
+		else if (SceneManager.GetActiveScene().buildIndex == 4)
 		{
 			SceneManager.LoadScene(1);
 		}
@@ -155,9 +156,9 @@ public class Player : MonoBehaviour
 			SceneManager.LoadScene(1);
 		}
 	}
-	public void jump()
+	public static void jump()
 	{
-		if (framesToWaitJump == 0)
+		if (Player.framesToWaitJump == 0)
 		{
 			jumpable = IsGrounded();
 			
@@ -171,7 +172,7 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
-	public void right()
+	public static void right()
 	{
 		valid = ValidMove();
         	
@@ -180,7 +181,7 @@ public class Player : MonoBehaviour
 			rb.velocity += new Vector3(0, 0, -5);
 		}
 	}
-	public void left()
+	public static void left()
 	{
 		valid = ValidMove();
         	

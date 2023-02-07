@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     
 	public void start()
 	{
-		SceneManager.LoadScene(4);
+		SceneManager.LoadScene(5);
 	}
 	public void menu()
 	{
@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 	}
 	public void sune()
 	{
-		SceneManager.LoadScene(3);
+		SceneManager.LoadScene(4);
 	}
 	public void quit()
 	{
