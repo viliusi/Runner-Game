@@ -56,21 +56,21 @@ public class UiManager : MonoBehaviour
 		
 		_timeText.text = Player.minutes + ":" + strSecs + ":" +  strMili;   
 		
-		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 3);
+		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 4);
 		
 		_deathCount.text = "Deaths: " + Player.deaths;
 	}
     
 	void left()
 	{
-		Player.left();
+		//Player.left();
 	}
 	void right()
 	{
-		Player.right();
+		//Player.right();
 	}
 	void jump()
 	{
-		Player.jump();
+		//Player.jump();
 	}
 }

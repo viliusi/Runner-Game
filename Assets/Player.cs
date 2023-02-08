@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
 		}
 	}
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 5 || SceneManager.GetActiveScene().buildIndex == 4)
 		{
@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
 		SceneManager.LoadScene(3, LoadSceneMode.Additive);
 		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		framesToWait = 20;
-	    rb = GetComponent<Rigidbody>();
-    }
+		rb = GetComponent<Rigidbody>();
+	}
 
 	void Update()
 	{
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
 			SceneManager.LoadScene(5);
 		}
 	}
-    void FixedUpdate()
+	void FixedUpdate()
 	{
 		if (miliSecs <= 970)
 		{
@@ -121,10 +121,10 @@ public class Player : MonoBehaviour
 			framesToWaitJump--;
 		}
 	}
-    bool ValidMove()
+	bool ValidMove()
 	{
 		// some code here, or sum
-        return true;
+		return true;
 	}
 	void resetPlayer()
 	{
@@ -155,39 +155,39 @@ public class Player : MonoBehaviour
 		{
 			SceneManager.LoadScene(1);
 		}
-	}
-	public static void jump()
-	{
-		if (Player.framesToWaitJump == 0)
-		{
-			jumpable = IsGrounded();
-			
-			if (jumpable == true)
-			{
-				rb.velocity += new Vector3(0, 7, 0);
-				
-				jumpable = false;
-					
-				framesToWaitJump = 20;
-			}
-		}
-	}
-	public static void right()
-	{
-		valid = ValidMove();
-        	
-		if (valid)
-		{
-			rb.velocity += new Vector3(0, 0, -5);
-		}
-	}
-	public static void left()
-	{
-		valid = ValidMove();
-        	
-		if (valid)
-		{
-			rb.velocity += new Vector3(0, 0, 5);
-		}
-	}
+	}	
+	public void jump()
+    {
+        if (framesToWaitJump == 0)
+        {
+            jumpable = IsGrounded();
+
+            if (jumpable == true)
+            {
+                rb.velocity += new Vector3(0, 7, 0);
+
+                jumpable = false;
+
+                framesToWaitJump = 20;
+            }
+        }
+    }
+    public void right()
+    {
+        valid = ValidMove();
+
+        if (valid)
+        {
+            rb.velocity += new Vector3(0, 0, -5);
+        }
+    }
+    public void left()
+    {
+        valid = ValidMove();
+
+        if (valid)
+        {
+            rb.velocity += new Vector3(0, 0, 5);
+        }
+    }
 }
