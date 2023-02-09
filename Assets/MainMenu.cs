@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-	
-    
-	public void start()
+	public void Update()
 	{
-		SceneManager.LoadScene(5);
+		
+	}    
+	public void start()
+	{		
+		SceneManager.LoadScene(6);
 	}
 	public void menu()
 	{
@@ -18,7 +20,7 @@ public class MainMenu : MonoBehaviour
 	}
 	public void sune()
 	{
-		SceneManager.LoadScene(4);
+		SceneManager.LoadScene(5);
 	}
 	public void quit()
 	{

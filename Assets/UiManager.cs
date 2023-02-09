@@ -56,21 +56,29 @@ public class UiManager : MonoBehaviour
 		
 		_timeText.text = Player.minutes + ":" + strSecs + ":" +  strMili;   
 		
-		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 4);
+		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 5);
 		
 		_deathCount.text = "Deaths: " + Player.deaths;
 	}
     
-	void left()
+	public static void left()
 	{
-		//Player.left();
+		Player.tryLeft = true;
 	}
-	void right()
+	public static void right()
 	{
-		//Player.right();
+		Player.tryRight = true;
 	}
-	void jump()
+	public static void jump()
 	{
-		//Player.jump();
+		Player.tryJump = true;
+	}
+	public static void reset()
+	{
+		Player.reset = true;
+	}
+	public static void hardReset()
+	{
+		Player.hardReset = true;
 	}
 }

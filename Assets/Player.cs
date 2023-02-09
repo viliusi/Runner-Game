@@ -11,13 +11,21 @@ public class Player : MonoBehaviour
 	public float speed = 0.1f;
 	private bool valid;
 	bool jumpable;
-	public Rigidbody rb;
 	public float distToGround;
 	public int currentLevelIndex;
 	public bool isPause;
 	public int framesToWait;
 	public int framesToWaitJump;
 	public static int deaths;
+	public static bool tryLeft;
+	public static bool tryRight;
+	public static bool tryJump;
+	public static bool reset;
+	public static bool hardReset;
+	//public static bool woman;
+	
+	public Rigidbody rb;
+	public MeshRenderer cubeRen;
      
 	private void OnTriggerEnter(Collider other)
 	{
@@ -43,7 +51,16 @@ public class Player : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 5 || SceneManager.GetActiveScene().buildIndex == 4)
+		/*if (woman == true)
+		{
+			cubeRen.enabled = false;
+		}
+		else
+		{
+			cubeRen.enabled = true;
+		}*/
+		
+		if (SceneManager.GetActiveScene().buildIndex == 6 || SceneManager.GetActiveScene().buildIndex == 5)
 		{
 			miliSecs = 0;
 			seconds = 0;
@@ -62,26 +79,7 @@ public class Player : MonoBehaviour
 	{
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
-		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-		{
-			left();
-		}
-		else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-		{
-			right();
-		}
-		else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-		{			
-			jump();
-		}
-		else if (Input.GetKeyDown(KeyCode.R))
-		{
-			resetPlayer();
-		}
-		else if (Input.GetKeyDown(KeyCode.H))
-		{
-			SceneManager.LoadScene(5);
-		}
+		inputHander();
 	}
 	void FixedUpdate()
 	{
@@ -147,15 +145,69 @@ public class Player : MonoBehaviour
 		{
 			SceneManager.LoadScene(currentLevelIndex);
 		}
-		else if (SceneManager.GetActiveScene().buildIndex == 4)
-		{
-			SceneManager.LoadScene(1);
-		}
 		else
 		{
 			SceneManager.LoadScene(1);
 		}
 	}	
+	void inputHander()
+	{
+		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+		{
+			tryLeft = true;
+		}
+		else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+		{
+			tryRight = true;
+		}
+		else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+		{			
+			tryJump = true;
+		}
+		else if (Input.GetKeyDown(KeyCode.R))
+		{
+			reset = true;
+		}
+		else if (Input.GetKeyDown(KeyCode.H))
+		{
+			hardReset = true;
+		}
+		
+		if (tryLeft == true)
+		{
+			left();
+			
+			tryLeft = false;
+		}
+		
+		if (tryRight == true)
+		{
+			right();
+			
+			tryRight = false;
+		}
+		
+		if (tryJump == true)
+		{
+			jump();
+			
+			tryJump = false;
+		}
+		
+		if (reset == true)
+		{
+			resetPlayer();
+			
+			reset = false;
+		}
+		
+		if (hardReset == true)
+		{
+			SceneManager.LoadScene(6);
+			
+			hardReset = false;
+		}
+	}
 	public void jump()
     {
         if (framesToWaitJump == 0)
