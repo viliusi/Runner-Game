@@ -23,9 +23,12 @@ public class Player : MonoBehaviour
 	public static bool reset;
 	public static bool hardReset;
 	//public static bool woman;
-	
 	public Rigidbody rb;
 	public MeshRenderer cubeRen;
+	public AudioSource jumpy;
+	public AudioSource diey;
+	public AudioSource finishy;
+	//public GameObject[] objs;
      
 	private void OnTriggerEnter(Collider other)
 	{
@@ -69,6 +72,8 @@ public class Player : MonoBehaviour
 			deaths = 0;
 		}
 		
+		//objs = GameObject.FindGameObjectsWithTag("Music");
+		
 		SceneManager.LoadScene(3, LoadSceneMode.Additive);
 		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		framesToWait = 20;
@@ -78,6 +83,11 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		distToGround = GetComponent<Collider>().bounds.extents.y;
+		
+		/*if (objs.Length > 2)
+		{
+			Destroy(finishy);
+		}*/
 		
 		inputHander();
 	}
@@ -128,6 +138,8 @@ public class Player : MonoBehaviour
 	{
 		deaths++;
 		
+		diey.GetComponent<AudioSource>().Play();
+		
 		transform.position = new Vector3(0, 3, 0);
 		rb.velocity = new Vector3(0, 0, 0);
 		rb.angularVelocity = new Vector3(0, 0, 0);
@@ -140,6 +152,8 @@ public class Player : MonoBehaviour
 	void nextLevel()
 	{
 		currentLevelIndex++;
+		
+		finishy.GetComponent<AudioSource>().Play();
 		
 		if (currentLevelIndex <= (SceneManager.sceneCountInBuildSettings - 1))
 		{
@@ -216,7 +230,10 @@ public class Player : MonoBehaviour
 
             if (jumpable == true)
             {
-                rb.velocity += new Vector3(0, 7, 0);
+	            rb.velocity += new Vector3(0, 7, 0);
+                
+	            DontDestroyOnLoad(finishy.gameObject);
+	            jumpy.GetComponent<AudioSource>().Play();
 
                 jumpable = false;
 
