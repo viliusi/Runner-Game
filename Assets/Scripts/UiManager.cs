@@ -54,7 +54,7 @@ public class UiManager : MonoBehaviour
 			strMili = miliRound.ToString();
 		}
 		
-		_timeText.text = Player.minutes + ":" + strSecs + ":" +  strMili;   
+		_timeText.text = Player.minutes + ":" + strSecs + ":" +  strMili;
 		
 		_levelNum.text = "Level: " + (SceneManager.GetActiveScene().buildIndex - 5);
 		

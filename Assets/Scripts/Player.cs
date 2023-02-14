@@ -5,30 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-	public static double minutes;
-	public static double seconds;
-	public static double miliSecs;
-	public float speed = 0.1f;
-	private bool valid;
-	bool jumpable;
-	public float distToGround;
-	public int currentLevelIndex;
-	public bool isPause;
-	public int framesToWait;
-	public int framesToWaitJump;
-	public static int deaths;
-	public static bool tryLeft;
-	public static bool tryRight;
-	public static bool tryJump;
-	public static bool reset;
-	public static bool hardReset;
-	//public static bool woman;
+	// Objects
 	public Rigidbody rb;
 	public MeshRenderer cubeRen;
 	public AudioSource jumpy;
 	public AudioSource diey;
 	public AudioSource finishy;
-	//public GameObject[] objs;
+	public Transform Camera;
+	public Transform Light;
+	
+	// Timer / UI variables
+	public static double minutes;
+	public static double seconds;
+	public static double miliSecs;
+	public static int deaths;
+	
+	// Values
+	public float errorBuffer;
+	public float speed;
+	public Vector3 StartPos;
+	public float JumpStrength;
+	public float sidewaysVelocity;
+	
+	// Movement variables
+	private float distToGround;
+	private bool valid;
+	private bool jumpable;
+	private bool isPause;
+	private int framesToWait;
+	private int framesToWaitJump;
+	
+	// On screen controls
+	public static bool tryLeft;
+	public static bool tryRight;
+	public static bool tryJump;
+	public static bool reset;
+	public static bool hardReset;
+	
+	//public static bool woman;
      
 	private void OnTriggerEnter(Collider other)
 	{
@@ -72,47 +86,25 @@ public class Player : MonoBehaviour
 			deaths = 0;
 		}
 		
-		//objs = GameObject.FindGameObjectsWithTag("Music");
-		
 		SceneManager.LoadScene(3, LoadSceneMode.Additive);
-		currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		framesToWait = 20;
 		rb = GetComponent<Rigidbody>();
 	}
 
 	void Update()
 	{
+		transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+		Camera.transform.position = transform.position + new Vector3(-8, 5, 0);
+		Light.transform.position = transform.position + new Vector3(-9, 10, 0);
+		
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		
-		/*if (objs.Length > 2)
-		{
-			Destroy(finishy);
-		}*/
-		
 		inputHander();
+		
+		timerHandler();
 	}
 	void FixedUpdate()
 	{
-		if (miliSecs <= 970)
-		{
-			miliSecs += 20;
-		}
-		else
-		{
-			miliSecs = 0;
-			
-			seconds += 1;
-			
-			if (58.5 <= seconds)
-			{
-				seconds = 0;
-				
-				minutes += 1;
-			}
-		}
-		
-		transform.position += new Vector3(speed, 0, 0);
-		
 		if (isPause == true)
 		{
 			if (framesToWait > 0)
@@ -140,24 +132,23 @@ public class Player : MonoBehaviour
 		
 		diey.GetComponent<AudioSource>().Play();
 		
-		transform.position = new Vector3(0, 3, 0);
+		transform.position = StartPos;
 		rb.velocity = new Vector3(0, 0, 0);
 		rb.angularVelocity = new Vector3(0, 0, 0);
 		transform.rotation = Quaternion.identity;
 	}
 	bool IsGrounded() 
 	{
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + errorBuffer);
 	}
 	void nextLevel()
 	{
-		currentLevelIndex++;
-		
+		DontDestroyOnLoad(finishy.gameObject);
 		finishy.GetComponent<AudioSource>().Play();
 		
-		if (currentLevelIndex <= (SceneManager.sceneCountInBuildSettings - 1))
+		if (SceneManager.GetActiveScene().buildIndex + 1 <= (SceneManager.sceneCountInBuildSettings - 1))
 		{
-			SceneManager.LoadScene(currentLevelIndex);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		}
 		else
 		{
@@ -222,6 +213,24 @@ public class Player : MonoBehaviour
 			hardReset = false;
 		}
 	}
+	void timerHandler()
+	{
+		miliSecs += 1000 * Time.deltaTime;
+		
+		if (miliSecs >= 1000)
+		{
+			miliSecs -= 1000;
+			
+			seconds += 1;
+			
+			if (58.5 <= seconds)
+			{
+				seconds = 0;
+				
+				minutes += 1;
+			}
+		}
+	}
 	public void jump()
     {
         if (framesToWaitJump == 0)
@@ -230,9 +239,8 @@ public class Player : MonoBehaviour
 
             if (jumpable == true)
             {
-	            rb.velocity += new Vector3(0, 7, 0);
-                
-	            DontDestroyOnLoad(finishy.gameObject);
+	            rb.velocity += new Vector3(0, JumpStrength, 0);
+            	
 	            jumpy.GetComponent<AudioSource>().Play();
 
                 jumpable = false;
@@ -247,7 +255,7 @@ public class Player : MonoBehaviour
 
         if (valid)
         {
-            rb.velocity += new Vector3(0, 0, -5);
+	        rb.velocity += new Vector3(0, 0, -sidewaysVelocity);
         }
     }
     public void left()
@@ -256,7 +264,7 @@ public class Player : MonoBehaviour
 
         if (valid)
         {
-            rb.velocity += new Vector3(0, 0, 5);
+            rb.velocity += new Vector3(0, 0, sidewaysVelocity);
         }
     }
 }

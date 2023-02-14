@@ -338,12 +338,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585474776}
   m_LocalRotation: {x: 0.41385812, y: 0.5733423, z: -0.41385818, w: 0.5733423}
-  m_LocalPosition: {x: -10, y: 5, z: 0}
+  m_LocalPosition: {x: -10, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 71.646, y: 90, z: 0}
 --- !u!1 &639468555
 GameObject:
@@ -356,7 +356,6 @@ GameObject:
   - component: {fileID: 639468559}
   - component: {fileID: 639468558}
   - component: {fileID: 639468557}
-  - component: {fileID: 639468556}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -364,20 +363,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &639468556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639468555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83390ee11e0e593449dce41834fbae6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1328485708}
-  Light: {fileID: 585474778}
 --- !u!81 &639468557
 AudioListener:
   m_ObjectHideFlags: 0
@@ -437,12 +422,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639468555}
   m_LocalRotation: {x: 0.18301274, y: 0.6830127, z: -0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: -8.78, y: 10.34, z: 0}
+  m_LocalPosition: {x: -8, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 30, y: 90, z: 0}
 --- !u!1 &1328485701
 GameObject:
@@ -507,18 +492,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2134c0aee822c43a53b71cd4fe0152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
-  distToGround: 0
-  currentLevelIndex: 0
-  isPause: 0
-  framesToWait: 0
-  framesToWaitJump: 0
   rb: {fileID: 1328485703}
   cubeRen: {fileID: 1328485706}
   jumpy: {fileID: 1625351497}
   diey: {fileID: 2383944}
   finishy: {fileID: 1425736568}
-  objs: []
+  Camera: {fileID: 639468559}
+  Light: {fileID: 585474778}
+  errorBuffer: 0.1
+  speed: 5
+  StartPos: {x: 0, y: 3, z: 0}
+  JumpStrength: 7
+  sidewaysVelocity: 5
 --- !u!65 &1328485705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -590,7 +575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328485701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -598,7 +583,7 @@ Transform:
   - {fileID: 1625351496}
   - {fileID: 2383945}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1389024977
 PrefabInstance:
@@ -697,7 +682,7 @@ GameObject:
   - component: {fileID: 1425736567}
   - component: {fileID: 1425736568}
   m_Layer: 0
-  m_Name: Audio Source (2)
+  m_Name: Victory
   m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,7 +701,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1425736568
 AudioSource:

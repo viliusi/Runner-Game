@@ -7,8 +7,8 @@ public class Field : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
-    {
-	    SceneManager.LoadScene(4, LoadSceneMode.Additive);
+	{	    
+		SceneManager.LoadScene(4, LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
