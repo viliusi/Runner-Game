@@ -1,52 +1,64 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PHP : MonoBehaviour
 {
-	public string URL;
-	public WWW WWW;
-	
-	void Start() {
-		StartCoroutine(Upload());
+	[SerializeField]
+	private TMP_InputField _initials;
+
+	public string url;
+
+	void Start()
+	{
+		
 	}
 
-	IEnumerator Upload(){
-		yield return Upload1();
-		yield return Upload2();
-	}
+	public void Submit()
+	{
+		string initialsText = _initials.text;
+		initialsText = initialsText.ToUpper();
 
-	IEnumerator Upload1() {
-		List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-		formData.Add( new MultipartFormDataSection("field1=foo&field2=bar") );
-		//formData.Add( new MultipartFormFileSection("my file data", "myfile.txt") );
-
-		UnityWebRequest www = UnityWebRequest.Post(url, formData);
-		yield return www.SendWebRequest();
-
-		if(www.isNetworkError || www.isHttpError) {
-			Debug.Log(www.error);
+		if (initialsText.Length == 2)
+		{
+            Encoding.Post(initialsText, url, Player.minutes, Player.seconds, Player.miliSecs, Player.deaths, System.DateTime.Now.Year, System.DateTime.Now.Month, System.DateTime.Now.Day);
 		}
-		else {
-			Debug.Log("Form upload complete!");
-			Debug.Log( "MULTIPART: " + www.downloadHandler.text );
+		else
+		{
+			Debug.Log("Initials must be 2 characters long");
 		}
 	}
+}
 
-	IEnumerator Upload2() {
-		WWWForm form = new WWWForm();
-		form.AddField("myField", "myData");
+public abstract class Encoding : System.Net.WebRequest, System.Runtime.Serialization.ISerializable
+{
+	public static System.Text.Encoding UTF8 { get; }
 
-		UnityWebRequest www = UnityWebRequest.Post(url, form);
-		yield return www.SendWebRequest();
+	public static void Post(string initialsText, string url, double minutes, double seconds, double miliSecs, int deaths, int year, int month, int day)
+	{
+		byte[] byteArray = Encoding.UTF8.GetBytes("initials=" + initialsText + "&" + 
+		"minutes=" + minutes + "&" + 
+		"seconds=" + seconds + "&" + 
+		"miliseconds=" + miliSecs + "&" + 
+		"deaths=" + deaths + "&" + 
+		"year=" + year + "&" + 
+		"month=" + month + "&" + 
+		"day=" + day);
 
-		if(www.isNetworkError || www.isHttpError) {
-			Debug.Log(www.error);
+		HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+		webRequest.Method = "POST";
+		webRequest.ContentType = "application/x-www-form-urlencoded";
+		webRequest.ContentLength = byteArray.Length;
+
+		using (Stream webpageStream = webRequest.GetRequestStream())
+		{
+			webpageStream.Write(byteArray, 0, byteArray.Length);
 		}
-		else {
-			Debug.Log("Form upload complete!");
-			Debug.Log( "WWWForm: " + www.downloadHandler.text );
-		}
-	}
 	}
 }
